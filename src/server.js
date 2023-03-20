@@ -1,10 +1,8 @@
 import http from 'node:http'
-import { Database } from './database.js'
-import { randomUUID as uuid} from 'node:crypto'
 
 import { json } from './middlewares/json.js'
+import { routes } from './routes.js'
 
-const database = new Database()
 
 const server = http.createServer(async (req,res)=>{
 
@@ -12,7 +10,7 @@ const server = http.createServer(async (req,res)=>{
 
     await json(req,res)
 
-    const route = route.find(route =>{
+    const route = routes.find(route =>{
         return route.method === method && route.path === url
     })    
 
